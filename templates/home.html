@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h2>Home Page</h2>
+<p>Welcome , {{ username }}!</p>
+<form action="{{ url_for('home') }}" method="post">
+    <select name="language">
+        {% for lang in config['LANG'] %}
+            <option value={{lang}} {% if lang == language %} selected {% endif %}>{{lang}}</option>
+        {% endfor %}
+    </select>
+    <button>Show Recommendations</button>
+</form>
+{% if language %}
+    {{recommendation | safe}}
+{% endif %}
+{% endblock %}
